@@ -66,7 +66,6 @@ class LoanApplicationServiceTest {
         CreditScore creditScore= new CreditScore();
         creditScore.setScore(600);
         creditScore.setIdentityNumber(35830993628L);
-
         LoanApplicationResult mockResult = new LoanApplicationResult();
         mockResult.setCreatedDate(LocalDateTime.now());
         mockResult.setLimit(20000);
@@ -83,7 +82,6 @@ class LoanApplicationServiceTest {
         assertThat(result.getLimit()).isEqualTo(20000);
         verify(loanApplicationPersistencePort,times(1)).createLoanApplication(mockMember,mockResult);
     }
-
 
     @Test
     void retrieveLoanApplications() {
@@ -115,15 +113,12 @@ class LoanApplicationServiceTest {
                 .phoneNumber("53742")
                 .salary(5000)
                 .build();
-
         Throwable exception = assertThrows(
                 FinalHomeworkValidationException.class, () -> {
                     loanApplicationService.createLoanApplication(loanApplication);
                 }
         );
-
         assertEquals("PHONE NUMBER IS NOT EQUAL TO 11", exception.getMessage());
-
     }
 
     @Test
@@ -143,7 +138,6 @@ class LoanApplicationServiceTest {
                 }
         );
         assertEquals("NOT ADULT", exception.getMessage());
-
     }
 
 }

@@ -1,5 +1,7 @@
 package com.halil.finalhomework.domain.member;
 
+import com.halil.finalhomework.domain.exception.ExceptionType;
+import com.halil.finalhomework.domain.exception.FinalHomeworkValidationException;
 import com.halil.finalhomework.domain.port.MemberPersistencePort;
 import com.halil.finalhomework.domain.port.RedisCachePort;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ public class MemberService {
     private final RedisCachePort redisCachePort;
 
     public Member createMember(Member newMember){
+        if (Boolean.TRUE.equals(memberPersistencePort.isIdentityNumberAlreadyExist(newMember.getIdentityNumber()))){
+            throw new FinalHomeworkValidationException(ExceptionType.IDENTITY_NUMBER_EXISTS);
+        }
         return  memberPersistencePort.createMember(newMember);
     }
 

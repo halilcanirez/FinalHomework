@@ -11,8 +11,8 @@ public enum ExceptionType {
     CREDIT_SCORE_DATA_NOT_FOUND(1002, "Member's Credit Score Not Found"),
 
     IS_NOT_AN_ADULT(2001, "NOT ADULT"),
-    PHONE_NUMBER_SIZE_NOT_EQUAL_11(2002 , "PHONE NUMBER IS NOT EQUAL TO 11");
-
+    PHONE_NUMBER_SIZE_NOT_EQUAL_11(2002 , "PHONE NUMBER IS NOT EQUAL TO 11"),
+    IDENTITY_NUMBER_EXISTS(2002, "THİS IDENTİTY NUMBER ALREADY USE ");
 
     private final Integer code;
     private final String message;

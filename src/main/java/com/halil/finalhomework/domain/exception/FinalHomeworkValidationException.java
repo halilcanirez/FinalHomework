@@ -7,7 +7,7 @@ public class FinalHomeworkValidationException extends RuntimeException{
 
     private final ExceptionType exceptionType;
 
-    public FinalHomeworkValidationException( ExceptionType exceptionType) {
+    public FinalHomeworkValidationException(ExceptionType exceptionType) {
         super(exceptionType.getMessage());
         this.exceptionType = exceptionType;
     }

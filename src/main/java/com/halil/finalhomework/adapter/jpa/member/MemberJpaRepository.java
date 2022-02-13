@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface MemberJpaRepository extends JpaRepository<MemberEntity,Long> {
     Optional<MemberEntity> findByIdentityNumber(Long identityNumber);
+    Boolean existsByIdentityNumber(Long ıdentityNumber);
 }

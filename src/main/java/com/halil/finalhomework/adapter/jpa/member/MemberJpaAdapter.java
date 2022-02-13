@@ -40,6 +40,12 @@ public class MemberJpaAdapter implements MemberPersistencePort {
         return entity.get().convertToMember();
     }
 
+    @Override
+    public Boolean isIdentityNumberAlreadyExist(Long identityNumber) {
+        return memberJpaRepository.existsByIdentityNumber(identityNumber);
+    }
+
+
     private MemberEntity getEntityFromLoanApplication(LoanApplication loanApplication){
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setIdentityNumber(loanApplication.getIdentityNumber());
