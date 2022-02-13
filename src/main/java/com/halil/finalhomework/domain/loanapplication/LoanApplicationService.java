@@ -23,11 +23,8 @@ public class LoanApplicationService {
     private final MemberPersistencePort memberPersistencePort;
     private final LoanApplicationStrategy loanApplicationStrategy;
 
-
     public LoanApplicationResult createLoanApplication(LoanApplication loanApplication){
-
         applicationValidator(loanApplication);
-
         Member member = memberPersistencePort.retrieveOrCreateMember(loanApplication);
         Integer memberCreditScore = creditScorePersistencePort.retrieveMemberCreditScore(loanApplication.getIdentityNumber());
         LoanApplicationResult applicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, memberCreditScore);
@@ -39,7 +36,6 @@ public class LoanApplicationService {
         return loanApplicationPersistencePort.retrieveLoanApplications(identityNumber);
     }
 
-
     private void applicationValidator(LoanApplication loanApplication){
         ValidationResult validatorResult = isAdult()
                 .and(isPhoneNumberAcceptable())
@@ -49,5 +45,4 @@ public class LoanApplicationService {
             throw new FinalHomeworkValidationException(validatorResult.getExceptionType());
         }
     }
-
 }
