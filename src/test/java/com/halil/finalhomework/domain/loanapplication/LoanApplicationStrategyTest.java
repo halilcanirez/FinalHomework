@@ -45,8 +45,63 @@ class LoanApplicationStrategyTest {
         assertThat(loanApplicationResult).isNotNull();
         assertThat(loanApplicationResult.getStatus()).isEqualTo(LoanApplicationStatus.DECLINED);
         assertThat(loanApplicationResult.getLimit()).isEqualTo(0);
-
     }
 
+    @Test
+    void should_application_result_equal_second_rule(){
+        //given
+        LoanApplication loanApplication=LoanApplication.builder()
+                .birthDate(LocalDate.now())
+                .identityNumber(35830993628L)
+                .name("test name")
+                .surname("test surname")
+                .phoneNumber("5374282221")
+                .salary(4000)
+                .build();
+        //when
+        LoanApplicationResult loanApplicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, 500);
+        //then
+        assertThat(loanApplicationResult).isNotNull();
+        assertThat(loanApplicationResult.getStatus()).isEqualTo(LoanApplicationStatus.ACCEPTED);
+        assertThat(loanApplicationResult.getLimit()).isEqualTo(10000);
+    }
+
+    @Test
+    void should_application_result_equal_third_rule(){
+        //given
+        LoanApplication loanApplication=LoanApplication.builder()
+                .birthDate(LocalDate.now())
+                .identityNumber(35830993628L)
+                .name("test name")
+                .surname("test surname")
+                .phoneNumber("5374282221")
+                .salary(6000)
+                .build();
+        //when
+        LoanApplicationResult loanApplicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, 500);
+        //then
+        assertThat(loanApplicationResult).isNotNull();
+        assertThat(loanApplicationResult.getStatus()).isEqualTo(LoanApplicationStatus.ACCEPTED);
+        assertThat(loanApplicationResult.getLimit()).isEqualTo(20000);
+    }
+
+    @Test
+    void should_application_result_equal_fourth_rule(){
+        //given
+        LoanApplication loanApplication=LoanApplication.builder()
+                .birthDate(LocalDate.now())
+                .identityNumber(35830993628L)
+                .name("test name")
+                .surname("test surname")
+                .phoneNumber("5374282221")
+                .salary(6000)
+                .build();
+        //when
+        LoanApplicationResult loanApplicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, 1000);
+        //then
+        assertThat(loanApplicationResult).isNotNull();
+        assertThat(loanApplicationResult.getStatus()).isEqualTo(LoanApplicationStatus.ACCEPTED);
+        assertThat(loanApplicationResult.getLimit()).isEqualTo(24000);
+    }
 
 }
