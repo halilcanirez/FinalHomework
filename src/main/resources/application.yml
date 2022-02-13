@@ -17,3 +17,9 @@ redis:
 loan-application:
   credit-limit-multiplier: 4
 
+
+application:
+  description: Final HomeWork Halil Can Irez
+  version: 1.0.0
+
+

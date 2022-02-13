@@ -20,7 +20,7 @@ public class LoanApplicationStrategy {
         put((creditScore, salary) -> creditScore < 500, LoanApplicationFirstRule::new);
         put((creditScore, salary) -> creditScore >= 500 && creditScore < 1000 && salary <5000, LoanApplicationSecondRule::new);
         put((creditScore, salary) -> creditScore >= 500 && creditScore < 1000 && salary >=5000, LoanApplicationThirdRule::new);
-        put((creditScore, salary) -> creditScore >= 1000,  () -> new LoanApplicationFourthRule());
+        put((creditScore, salary) -> creditScore >= 1000, LoanApplicationFourthRule::new);
     }};
 
     public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication, Integer creditScore){

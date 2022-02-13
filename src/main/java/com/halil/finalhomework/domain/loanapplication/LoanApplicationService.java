@@ -6,6 +6,7 @@ import com.halil.finalhomework.domain.member.Member;
 import com.halil.finalhomework.domain.port.CreditScorePersistencePort;
 import com.halil.finalhomework.domain.port.LoanApplicationPersistencePort;
 import com.halil.finalhomework.domain.port.MemberPersistencePort;
+import com.halil.finalhomework.domain.port.SmsSenderPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class LoanApplicationService {
     private final LoanApplicationPersistencePort loanApplicationPersistencePort;
     private final MemberPersistencePort memberPersistencePort;
     private final LoanApplicationStrategy loanApplicationStrategy;
+    private final SmsSenderPort smsSenderPort;
 
     public LoanApplicationResult createLoanApplication(LoanApplication loanApplication){
         applicationValidator(loanApplication);
@@ -29,6 +31,7 @@ public class LoanApplicationService {
         Integer memberCreditScore = creditScorePersistencePort.retrieveMemberCreditScore(loanApplication.getIdentityNumber());
         LoanApplicationResult applicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, memberCreditScore);
         loanApplicationPersistencePort.createLoanApplication(member,applicationResult);
+        smsSenderPort.sendMessage(applicationResult,loanApplication.getPhoneNumber());
         return applicationResult;
     }
 

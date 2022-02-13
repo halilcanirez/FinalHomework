@@ -6,6 +6,7 @@ import com.halil.finalhomework.domain.member.Member;
 import com.halil.finalhomework.domain.port.CreditScorePersistencePort;
 import com.halil.finalhomework.domain.port.LoanApplicationPersistencePort;
 import com.halil.finalhomework.domain.port.MemberPersistencePort;
+import com.halil.finalhomework.domain.port.SmsSenderPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,11 +34,13 @@ class LoanApplicationServiceTest {
     MemberPersistencePort memberPersistencePort;
     @Mock
     LoanApplicationStrategy loanApplicationStrategy;
+    @Mock
+    SmsSenderPort smsSenderPort;
 
     @BeforeEach
     void setup(){
         loanApplicationService= new LoanApplicationService(creditScorePersistencePort,
-                loanApplicationPersistencePort,memberPersistencePort,loanApplicationStrategy);
+                loanApplicationPersistencePort,memberPersistencePort,loanApplicationStrategy, smsSenderPort);
     }
 
     @Test
