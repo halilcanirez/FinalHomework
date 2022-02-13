@@ -1,31 +1,25 @@
 package com.halil.finalhomework.domain.loanapplication;
 
-import com.halil.finalhomework.domain.loanapplication.applicationrules.LoanApplicationFirstRule;
-import com.halil.finalhomework.domain.loanapplication.applicationrules.LoanApplicationRules;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.Mockito.*;
+
 
 @RequiredArgsConstructor
 class LoanApplicationStrategyTest {
 
-    LoanApplicationStrategy loanApplicationStrategy;
+     LoanApplicationStrategy loanApplicationStrategy;
+
+     LoanApplicationProperties loanApplicationProperties=new LoanApplicationProperties(4);
 
     @BeforeEach
     void setup(){
-        loanApplicationStrategy=new LoanApplicationStrategy();
+        loanApplicationStrategy=new LoanApplicationStrategy(loanApplicationProperties);
     }
 
     @Test
@@ -39,6 +33,8 @@ class LoanApplicationStrategyTest {
                 .phoneNumber("5374282221")
                 .salary(5000)
                 .build();
+        //mock
+
         //when
         LoanApplicationResult loanApplicationResult = loanApplicationStrategy.calculateLoanApplicationResult(loanApplication, 300);
         //then

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class LoanApplicationThirdRule implements LoanApplicationRules{
 
     @Override
-    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication) {
+    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication,Integer creditLimitMultiplier) {
         LoanApplicationResult loanApplicationResult = new LoanApplicationResult();
         loanApplicationResult.setStatus(LoanApplicationStatus.ACCEPTED);
         loanApplicationResult.setLimit(20000);

@@ -18,7 +18,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -64,7 +63,7 @@ class LoanApplicationServiceTest {
                 .build();
 
         CreditScore creditScore= new CreditScore();
-        creditScore.setScore(600);
+        creditScore.setScore(1000);
         creditScore.setIdentityNumber(35830993628L);
         LoanApplicationResult mockResult = new LoanApplicationResult();
         mockResult.setCreatedDate(LocalDateTime.now());
@@ -72,7 +71,7 @@ class LoanApplicationServiceTest {
         mockResult.setStatus(LoanApplicationStatus.ACCEPTED);
 
         when(memberPersistencePort.retrieveOrCreateMember(loanApplication)).thenReturn(mockMember);
-        when(creditScorePersistencePort.retrieveMemberCreditScore(35830993628L)).thenReturn(600);
+        when(creditScorePersistencePort.retrieveMemberCreditScore(35830993628L)).thenReturn(1000);
         when(loanApplicationStrategy.calculateLoanApplicationResult(loanApplication,creditScore.getScore())).thenReturn(mockResult);
         //when
         LoanApplicationResult result = loanApplicationService.createLoanApplication(loanApplication);
@@ -95,10 +94,8 @@ class LoanApplicationServiceTest {
                 mockResult
         );
         when(loanApplicationPersistencePort.retrieveLoanApplications(35830993628L)).thenReturn(loanApplicationResultList);
-
         //when
         List<LoanApplicationResult> loanApplicationResults = loanApplicationService.retrieveLoanApplications(35830993628L);
-
         //then
         assertThat(loanApplicationResultList).isNotEmpty();
     }
@@ -139,5 +136,4 @@ class LoanApplicationServiceTest {
         );
         assertEquals("NOT ADULT", exception.getMessage());
     }
-
 }

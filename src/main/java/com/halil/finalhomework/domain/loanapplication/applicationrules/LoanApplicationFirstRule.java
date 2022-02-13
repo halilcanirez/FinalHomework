@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Service("LoanApplicationFirstRule")
 public class LoanApplicationFirstRule implements LoanApplicationRules{
     @Override
-    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication) {
+    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication,Integer creditLimitMultiplier) {
         LoanApplicationResult loanApplicationResult = new LoanApplicationResult();
         loanApplicationResult.setStatus(LoanApplicationStatus.DECLINED);
         loanApplicationResult.setLimit(0);

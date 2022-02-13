@@ -116,7 +116,6 @@ class MemberServiceTest {
         verify(memberPersistencePort,times(1)).createMember(newMember);
         assertThat(createdMember).isNotNull();
         assertThat(createdMember.getIdentityNumber()).isEqualTo(35830993628L);
-
     }
 
 

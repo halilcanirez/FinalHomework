@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 public class LoanApplicationFourthRule implements LoanApplicationRules{
 
     @Override
-    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication) {
+    public LoanApplicationResult calculateLoanApplicationResult(LoanApplication loanApplication,Integer creditLimitMultiplier) {
         LoanApplicationResult loanApplicationResult = new LoanApplicationResult();
         loanApplicationResult.setStatus(LoanApplicationStatus.ACCEPTED);
-        loanApplicationResult.setLimit(loanApplication.getSalary()*4);
+        loanApplicationResult.setLimit(loanApplication.getSalary()*creditLimitMultiplier);
         loanApplicationResult.setCreatedDate(LocalDateTime.now());
         return loanApplicationResult;
     }

@@ -14,6 +14,8 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class LoanApplicationStrategy {
 
+    private final LoanApplicationProperties properties;
+
     private final Map<BiPredicate<Integer,Integer>, Supplier<LoanApplicationRules>> ruleMap = new LinkedHashMap<>() {{
         put((creditScore, salary) -> creditScore < 500, LoanApplicationFirstRule::new);
         put((creditScore, salary) -> creditScore >= 500 && creditScore < 1000 && salary <5000, LoanApplicationSecondRule::new);
@@ -29,7 +31,7 @@ public class LoanApplicationStrategy {
                 .findFirst()
                 .map(e -> ruleMap.get(e))
                 .get().get();
-        return loanApplicationRules.calculateLoanApplicationResult(loanApplication);
+        return loanApplicationRules.calculateLoanApplicationResult(loanApplication,properties.getCreditLimitMultiplier());
     }
 
 
