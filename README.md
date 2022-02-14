@@ -13,7 +13,7 @@
 - Open-Api
 - Lombok 
 
-Docker compose dosyasını çalıştırmak için : 
+# Docker compose dosyasını çalıştırmak için : 
  docker-compose -f src/main/resources/docker-compose.yml up -d
 
 # End-pointler 
