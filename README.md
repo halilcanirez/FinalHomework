@@ -23,10 +23,10 @@
 - PUT /member                 : update member
 - DELETE /member{memberId}    : delete member
 
--GET /loan-application        : retrieve loan applications result
--POST /loan-application       : apply new loan application , it returns application result
+- GET /loan-application        : retrieve loan applications result
+- POST /loan-application       : apply new loan application , it returns application result
 
--POST /credit-score           : create credit score 
+- POST /credit-score           : create credit score 
 
 # Swagger UI will be run on this url:
 - http://localhost:{PORT}/swagger-ui.html
