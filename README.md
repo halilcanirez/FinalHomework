@@ -1,6 +1,6 @@
 # Payten Java Bootcamp Final Ödevi
 
-#Tercih Ettiğim Yöntemler
+# Tercih Ettiğim Yöntemler
 - Kullanıcıya kredi verilmesini belirleyen kuralları Strategy Design pattern kullanarak yaptım.
 - Validation işlemlerini yapmak için Combinator pattern kullandım.
 - Kod orgazinazyonu için Hexogonal Mimariyi tercih ettim. Çünkü projede yapılacak eklemelere daha kolay izin verdiği için. 
@@ -12,3 +12,6 @@
 - Redis, PostgreSQL
 - Open-Api
 - Lombok 
+
+Docker compose dosyasını çalıştırmak için : 
+ docker-compose -f src/main/resources/docker-compose.yml up -d
