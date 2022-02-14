@@ -1,6 +1,6 @@
 # FinalHomework
 
-#Kullandığım Teknolojiler 
+# Kullandığım Teknolojiler 
 - Spring Boot
 - Spring Web
 - Docker
