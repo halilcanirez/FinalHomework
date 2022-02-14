@@ -1,9 +1,9 @@
-# Payten Java Bootcamp Final Ödevi
+# Payten Java Bootcamp Final Homework
 
 
-- Kullanıcıya kredi verilmesini belirleyen kuralları Strategy Design pattern kullanarak yaptım.
-- Validation işlemlerini yapmak için Combinator pattern kullandım.
-- Kod orgazinazyonu için Hexogonal Mimariyi tercih ettim. Çünkü projede yapılacak eklemelere daha kolay izin verdiği için. 
+- I wrote the rules that determine the loan to the user using the Strategy Design pattern.
+- I used Combinator Pattern to do Validation.
+- I preferred Hexogonal Architecture for code organization.
 
 # Tech Stack
 - Spring Boot
