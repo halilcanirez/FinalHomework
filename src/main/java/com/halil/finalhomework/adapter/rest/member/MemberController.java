@@ -30,4 +30,18 @@ public class MemberController {
         );
     }
 
+    @PutMapping("/member")
+    @ResponseStatus(value = HttpStatus.OK)
+    public MemberResponse updateMember(@RequestBody @Valid MemberUpdateRequest request ){
+        return MemberResponse.convertToMemberResponse(
+                memberService.updateMember(request.convertToMember())
+        );
+    }
+
+    @DeleteMapping("/member/{memberId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMember(@PathVariable  Long memberId){
+        memberService.deleteMember(memberId);
+    }
+
 }

@@ -26,6 +26,10 @@ public class MemberEntity {
     private String name;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(nullable = false)
     private String surname;
 
     @Column(nullable = false)
@@ -42,6 +46,7 @@ public class MemberEntity {
         memberEntity.setSurname(member.getSurname());
         memberEntity.setTelephoneNumber(member.getTelephoneNumber());
         memberEntity.setBirthDate(member.getBirthDate());
+        memberEntity.setStatus(Status.ACTIVE);
         return memberEntity;
     }
 

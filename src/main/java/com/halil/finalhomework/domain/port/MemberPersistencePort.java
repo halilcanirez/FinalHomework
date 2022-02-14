@@ -9,5 +9,7 @@ public interface MemberPersistencePort {
     Member retrieveMemberByIdentityNumber(Long identityNumber);
     Member retrieveOrCreateMember(LoanApplication loanApplication);
     Boolean isIdentityNumberAlreadyExist(Long identityNumber);
+    void updateStatusById(Long memberId);
+    Member updateMemberById(Member member);
 }
 

@@ -45,6 +45,23 @@ public class MemberJpaAdapter implements MemberPersistencePort {
         return memberJpaRepository.existsByIdentityNumber(identityNumber);
     }
 
+    @Override
+    public Member updateMemberById(Member member) {
+
+        MemberEntity memberEntity = MemberEntity.convertToMemberEntity(member);
+        return memberJpaRepository.save(memberEntity).convertToMember();
+    }
+
+    @Override
+    public void updateStatusById(Long memberId){
+        Optional<MemberEntity> entity =memberJpaRepository.findById(memberId);
+        if (entity.isEmpty()){
+            throw new FinalHomeworkDataNotFoundException(ExceptionType.MEMBER_DATA_NOT_FOUND);
+        }
+        MemberEntity entity2 = entity.get();
+        entity2.setStatus(Status.DELETED);
+        memberJpaRepository.save(entity2);
+    }
 
     private MemberEntity getEntityFromLoanApplication(LoanApplication loanApplication){
         MemberEntity memberEntity = new MemberEntity();
@@ -55,5 +72,7 @@ public class MemberJpaAdapter implements MemberPersistencePort {
         memberEntity.setTelephoneNumber(loanApplication.getPhoneNumber());
         return memberEntity;
     }
+
+
 
 }

@@ -1,23 +1,32 @@
 package com.halil.finalhomework.adapter.rest.member;
 
 import com.halil.finalhomework.domain.member.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Setter
 @Getter
+@Builder
 public class MemberResponse {
 
     private Long memberId;
+    private Long memberIdentityNumber;
     private String memberName;
     private String memberSurname;
+    private LocalDate memberBirthDate;
 
     public static MemberResponse convertToMemberResponse(Member member){
-        MemberResponse memberResponse = new MemberResponse();
-        memberResponse.setMemberId(member.getId());
-        memberResponse.setMemberName(member.getName());
-        memberResponse.setMemberSurname(member.getSurname());
-        return memberResponse;
+        return MemberResponse.builder()
+                .memberId(member.getId())
+                .memberIdentityNumber(member.getIdentityNumber())
+                .memberName(member.getName())
+                .memberSurname(member.getSurname()).
+                memberBirthDate(member.getBirthDate())
+                .build();
+
     }
 
 }

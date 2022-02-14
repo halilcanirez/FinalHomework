@@ -4,6 +4,7 @@ import com.halil.finalhomework.BaseIntegrationTest;
 import com.halil.finalhomework.adapter.jpa.member.MemberEntity;
 import com.halil.finalhomework.adapter.jpa.member.MemberJpaRepository;
 import com.halil.finalhomework.adapter.rest.common.ExceptionResponse;
+import com.halil.finalhomework.domain.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,7 +24,7 @@ class MemberControllerTest extends BaseIntegrationTest {
 
     @Test
     void should_create_member() {
-        //when
+        //given
         MemberCreateRequest request= MemberCreateRequest.builder()
                 .identityNumber(35830993623L)
                 .name("test name")
@@ -31,7 +32,7 @@ class MemberControllerTest extends BaseIntegrationTest {
                 .birthDate(LocalDate.of(1999,9,13))
                 .telephoneNumber("5342316214")
                 .build();
-        //given
+        //when
         ResponseEntity<MemberResponse> response = testRestTemplate.exchange("/member", HttpMethod.POST, new HttpEntity<>(request), MemberResponse.class);
         // then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -46,6 +47,33 @@ class MemberControllerTest extends BaseIntegrationTest {
         assertThat(optionalMember.get().getTelephoneNumber()).isEqualTo("5342316214");
         assertThat(optionalMember.get().getBirthDate()).isEqualTo(LocalDate.of(1999,9,13));
     }
+
+    @Test
+    @Sql(scripts = "/member-create.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    void should_update_member(){
+        MemberUpdateRequest updateRequest = MemberUpdateRequest.builder()
+                .id(1001L)
+                .memberIdentityNumber(35830993629L)
+                .memberName("changed")
+                .memberSurname("changed surname")
+                .telephoneNumber("345645")
+                .memberBirthDate(LocalDate.now())
+                .build();
+
+        ResponseEntity<MemberResponse> response = testRestTemplate.exchange("/member", HttpMethod.PUT, new HttpEntity<>(updateRequest), MemberResponse.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getMemberId()).isNotNull();
+
+        Optional<MemberEntity> optionalMember = memberJpaRepository.findById(1L);
+        assertThat(optionalMember).isPresent();
+        assertThat(optionalMember.get().getIdentityNumber()).isEqualTo(35839993346L);
+        assertThat(optionalMember.get().getName()).isEqualTo("changed");
+        assertThat(optionalMember.get().getSurname()).isEqualTo("changed surname");
+        assertThat(optionalMember.get().getTelephoneNumber()).isEqualTo("345645");
+        assertThat(optionalMember.get().getBirthDate()).isEqualTo(LocalDate.now());
+    }
+
 
     @Test
     @Sql(scripts = "/member-create.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)

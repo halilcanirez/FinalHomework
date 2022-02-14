@@ -36,4 +36,11 @@ public class MemberService {
         return memberFromCache.get();
     }
 
+    public Member updateMember(Member member) {
+        return memberPersistencePort.updateMemberById(member);
+    }
+
+    public void deleteMember(Long memberId){
+        memberPersistencePort.updateStatusById(memberId);
+    }
 }
