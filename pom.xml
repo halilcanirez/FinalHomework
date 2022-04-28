@@ -56,15 +56,12 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>2.5.5</version>
         </dependency>
-
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.10</version>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

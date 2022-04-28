@@ -28,3 +28,5 @@ public class LoanApplicationJpaAdepter implements LoanApplicationPersistencePort
                 .collect(Collectors.toList());
     }
 }
+
+
