@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class LoanApplicationCreateRequest {
 
     @NotNull
-    private Long    identityNumber;
+    private Long identityNumber;
     @NotBlank
     private String  name;
     @NotBlank
